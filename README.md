@@ -1,4 +1,4 @@
-## Getting Started
+## Como utilizar
 
 Primeiro, instale os pacotes :
 
