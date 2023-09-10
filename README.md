@@ -25,7 +25,7 @@ Abra [http://localhost:3000](http://localhost:3000)
 - Galaxy S8+
 - IPhone XR
 
-## Testado em Mobiles
+## Prints
 
 <div align="center">  
 <img src="https://github.com/matheusjean/solarapp-challenge/assets/74727256/58202753-df0d-4710-8cc1-ef8bce149d0b" width="200px">
