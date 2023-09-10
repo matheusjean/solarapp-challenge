@@ -40,8 +40,6 @@ const MapPage = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await api.get('/addresses')
-      console.log(response.data);
-
       setAddress(response.data)
       return response
     }
