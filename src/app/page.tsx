@@ -12,7 +12,6 @@ import { api } from 'service/apiClient';
 import Title from 'components/Title';
 import Card from 'components/Card';
 import Description from 'components/Description';
-import { API_KEY } from 'service/api-key';
 import SelectedAddress from 'components/SelectedAddress';
 
 type PositionProps = {
@@ -52,7 +51,7 @@ const MapPage = () => {
       <S.Container>
 
         <LoadScript
-          googleMapsApiKey={API_KEY}
+          googleMapsApiKey={process.env.API_KEY}
           libraries={["places"]}
         >
           <S.MapContainer>
