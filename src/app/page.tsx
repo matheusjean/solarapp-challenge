@@ -12,6 +12,8 @@ import { api } from 'service/apiClient';
 import Title from 'components/Title';
 import Card from 'components/Card';
 import Description from 'components/Description';
+import { API_KEY } from 'service/api-key';
+import SelectedAddress from 'components/SelectedAddress';
 
 type PositionProps = {
   lat: number,
@@ -52,7 +54,7 @@ const MapPage = () => {
       <S.Container>
 
         <LoadScript
-          googleMapsApiKey={process.env.API_KEY}
+          googleMapsApiKey={API_KEY}
           libraries={["places"]}
         >
           <S.MapContainer>
@@ -82,15 +84,19 @@ const MapPage = () => {
                   })
                 }}>
                   <Title>{addr.city}</Title>
-                  <Description>{`${addr.streetName}, ${addr.streetNumber}, ${addr.zipcode}, ${addr.state}`}</Description>
+                  <Description>{`${addr.streetName},
+                  ${addr.streetNumber},
+                  ${addr.zipcode},
+                  ${addr.state}`}
+                  </Description>
                 </Card>
               )
             })}
-            <Card background width key="teste">
+            <SelectedAddress key={position.city}>
               <Title padding="20px">{position.city}</Title>
               <Description>{`Local: ${position.description}`}</Description>
               <Description>{`Bairro: ${position.neighbourhood}, ${Number(position.streetNumber)} `}</Description>
-            </Card>
+            </SelectedAddress>
           </S.Wrapper>
         </S.SideContainer>
       </S.Container>
