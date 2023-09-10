@@ -5,7 +5,6 @@ import {
   Marker,
   LoadScript,
 } from "@react-google-maps/api";
-import { API_KEY } from 'service/api-key';
 import * as S from './styles';
 import Heading from 'components/Heading';
 import { ApiResponse } from 'models/api-response';
@@ -53,7 +52,7 @@ const MapPage = () => {
       <S.Container>
 
         <LoadScript
-          googleMapsApiKey={API_KEY}
+          googleMapsApiKey={process.env.API_KEY}
           libraries={["places"]}
         >
           <S.MapContainer>
