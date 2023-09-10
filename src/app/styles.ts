@@ -7,7 +7,6 @@ export const Container = styled.div`
     padding: ${theme.spacings.small};
     height: 91vh;
     margin-top: -20px;
-    background-color: red;
 
     div {
       border-radius: ${theme.border.radius.medium};
