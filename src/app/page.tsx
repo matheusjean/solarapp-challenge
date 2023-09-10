@@ -1,95 +1,102 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client"
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import {
+  GoogleMap,
+  Marker,
+  LoadScript,
+} from "@react-google-maps/api";
+import { API_KEY } from 'service/api-key';
+import * as S from './styles';
+import Heading from 'components/Heading';
+import { ApiResponse } from 'models/api-response';
+import { api } from 'service/apiClient';
+import Title from 'components/Title';
+import Card from 'components/Card';
+import Description from 'components/Description';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+type PositionProps = {
+  lat: number,
+  lng: number,
+  city?: string,
+  description?: string,
+  neighbourhood?: string,
+  streetNumber?: number,
 }
+const MapPage = () => {
+  const [address, setAddress] = useState<ApiResponse[]>([])
+  const [position, setPosition] = useState<PositionProps>({
+    lat: -30.0846697,
+    lng: -51.2458384,
+    city: "Dourados",
+    description: "Shopping Avenida Center",
+    neighbourhood: "Jardim Paulista",
+    streetNumber: 3600
+  })
+
+  const mapRef = useRef<GoogleMap>()
+  const onLoad = useCallback(map => (mapRef.current = map), [])
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await api.get('/addresses')
+      console.log(response.data);
+
+      setAddress(response.data)
+      return response
+    }
+    fetchData()
+  }, [])
+
+  return (
+    <>
+      <Heading title="Solar Info" />
+      <S.Container>
+
+        <LoadScript
+          googleMapsApiKey={API_KEY}
+          libraries={["places"]}
+        >
+          <S.MapContainer>
+            <GoogleMap
+              onLoad={onLoad}
+              mapContainerStyle={{ width: "100%", height: "100%" }}
+              center={position}
+              zoom={15}
+            >
+              <Marker position={position} />
+            </GoogleMap>
+          </S.MapContainer>
+        </LoadScript>
+
+        <S.SideContainer>
+          <S.Wrapper>
+            {address.map((addr) => {
+              return (
+                <Card key={addr.uuid} onClick={() => {
+                  setPosition({
+                    lat: Number(addr.latitude),
+                    lng: Number(addr.longitude),
+                    city: addr.city,
+                    description: addr.description,
+                    neighbourhood: addr.neighbourhood,
+                    streetNumber: addr.streetNumber
+                  })
+                }}>
+                  <Title>{addr.city}</Title>
+                  <Description>{`${addr.streetName}, ${addr.streetNumber}, ${addr.zipcode}, ${addr.state}`}</Description>
+                </Card>
+              )
+            })}
+            <Card background width key="teste">
+              <Title padding="20px">{position.city}</Title>
+              <Description>{`Local: ${position.description}`}</Description>
+              <Description>{`Bairro: ${position.neighbourhood}, ${Number(position.streetNumber)} `}</Description>
+            </Card>
+          </S.Wrapper>
+        </S.SideContainer>
+      </S.Container>
+    </>
+  );
+};
+
+export default MapPage;
