@@ -3,13 +3,12 @@ import styled, { css } from 'styled-components'
 
 type CardProps = {
   background?: string
-  width?: string
 }
 
 export const Container = styled.div<CardProps>`
-  ${({ theme, background }) => css`
-    background-color: ${background ? 'none' : '#e8e8e8'};
+  ${({ theme }) => css`
     margin: ${theme.spacings.xsmall};
+    background-color: ${theme.colors.lightGray};
     width: auto;
     height: 80px;
 
