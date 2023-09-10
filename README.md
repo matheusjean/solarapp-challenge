@@ -17,6 +17,8 @@ yarn dev
 
 Abra [http://localhost:3000](http://localhost:3000) 
 
+## Adicione a Sua key do Google Maps no .ENV
+
 ## Testado em Mobiles
 
 - Galaxy M53
