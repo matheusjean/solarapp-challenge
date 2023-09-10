@@ -8,10 +8,10 @@ export const Container = styled.span`
     font-size: ${theme.font.sizes.small};
 
     @media (max-width: ${theme.screen.big}) {
-      margin-left: ${theme.spacings.xxsmall};
+      margin-left: ${theme.screen.xxsmall};
     }
-    @media (max-width: ${theme.spacings.large}) {
-      font-size: ${theme.font.sizes.xxxxsmall};
+    @media (max-width: ${theme.screen.large}) {
+      font-size: 1rem;
     }
   `}
 `
