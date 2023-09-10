@@ -5,7 +5,7 @@ export const Container = styled.div`
   ${({ theme }) => css`
     display: flex;
     padding: ${theme.spacings.small};
-    height: 91vh;
+    height: 92vh;
     margin-top: -20px;
 
     div {

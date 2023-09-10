@@ -10,7 +10,15 @@ export const Container = styled.div<CardProps>`
     margin: ${theme.spacings.xsmall};
     background-color: ${theme.colors.lightGray};
     width: auto;
-    height: 80px;
+    height: 72px;
+
+    @media (max-width: 1700px) {
+      margin: ${theme.spacings.xsmall} -15px;
+      width: 80%;
+      height: 5.2rem;
+      margin-left: 10px;
+      margin-top: 5px;
+    }
 
     @media (max-width: 1200px) {
       margin: ${theme.spacings.xsmall} -15px;
