@@ -20,7 +20,7 @@ export default {
   },
   colors: {
     primary: '#e0e0e0',
-    gray: 'rgba(255, 255, 255, 0.4)',
+    lightGray: ' #e8e8e8',
   },
   spacings: {
     xsmall: '10px',
