@@ -41,3 +41,4 @@ Abra [http://localhost:3000](http://localhost:3000)
 - **[TypeScript](https://www.typescriptlang.org/)**
 - **[Styled Components](https://styled-components.com/)**
 - **[Eslint](https://eslint.org/)**
+- **[GoogleMaps](https://www.npmjs.com/package/@react-google-maps/api)**
