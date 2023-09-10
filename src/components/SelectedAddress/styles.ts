@@ -6,6 +6,7 @@ export const Container = styled.div`
     background-color: none;
     margin: ${theme.spacings.xsmall};
     width: auto;
+    margin-top: 20px;
     height: 80px;
 
     @media (max-width: 1200px) {
