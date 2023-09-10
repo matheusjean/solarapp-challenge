@@ -24,4 +24,4 @@ Abra [http://localhost:3000](http://localhost:3000)
 
 ## Deploy na Netlify
 
-- https://ubiquitous-palmier-b0f22c.netlify.app/
+- https://gleeful-sprite-7bfab9.netlify.app/
