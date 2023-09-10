@@ -93,7 +93,7 @@ const MapPage = () => {
               )
             })}
             <SelectedAddress key={position.city}>
-              <Title padding="20px">{position.city}</Title>
+              <Title>{position.city}</Title>
               <Description>{`Local: ${position.description}`}</Description>
               <Description>{`Bairro: ${position.neighbourhood}, ${Number(position.streetNumber)} `}</Description>
             </SelectedAddress>
