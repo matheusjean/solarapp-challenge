@@ -1,16 +1,21 @@
 'use client'
 import styled, { css } from 'styled-components'
-
-type CardProps = {
-  background?: string
+interface StyledDivProps {
+  isClicked: boolean
 }
 
-export const Container = styled.div<CardProps>`
-  ${({ theme }) => css`
+export const Container = styled.div<StyledDivProps>`
+  ${({ theme, isClicked }) => css`
     margin: ${theme.spacings.xsmall};
-    background-color: ${theme.colors.lightGray};
+    /* background-color: ${theme.colors.lightGray}; */
     width: auto;
     height: 72px;
+    background-color: ${isClicked ? '#87ceeb' : theme.colors.lightGray};
+
+    &:hover {
+      cursor: pointer;
+      background-color: #87ceeb;
+    }
 
     @media (max-width: 1700px) {
       margin: ${theme.spacings.xsmall} -15px;

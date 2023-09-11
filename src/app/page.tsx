@@ -32,6 +32,7 @@ const MapPage = () => {
     neighbourhood: "Jardim Paulista",
     streetNumber: 3600
   })
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
   const mapRef = useRef<GoogleMap>()
   const onLoad = useCallback(map => (mapRef.current = map), [])
@@ -68,9 +69,9 @@ const MapPage = () => {
 
         <S.SideContainer>
           <S.Wrapper>
-            {address.map((addr) => {
+            {address.map((addr, index) => {
               return (
-                <Card key={addr.uuid} onClick={() => {
+                <Card key={addr.uuid} clicked onClick={() => {
                   setPosition({
                     lat: Number(addr.latitude),
                     lng: Number(addr.longitude),
@@ -79,7 +80,11 @@ const MapPage = () => {
                     neighbourhood: addr.neighbourhood,
                     streetNumber: addr.streetNumber
                   })
-                }}>
+                  setSelectedCard(index);
+                  
+                }}
+                isClicked={selectedCard === index}
+                >
                   <Title>{addr.city}</Title>
                   <Description>{`${addr.streetName},
                   ${addr.streetNumber},
